@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-do List</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 70%;
+            padding: 6px;
+        }
+
+        button {
+            padding: 6px 10px;
+            background: #4caf50;
+            color: white;
+            border: none;
+        }
+
+        ul {
+            margin-top: 15px;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            background: #eee;
+            margin: 6px 0;
+            padding: 8px;
+
+            opacity: 0;
+            transform: translateY(-5px);
+            animation: show 0.3s forwards;
+        }
+
+        @keyframes show {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>My To-do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+    function addTask() {
+        let task = document.getElementById("taskInput").value;
+
+        if (task === "") {
+            return;
+        }
+
+        let li = document.createElement("li");
+        li.innerText = task;
+
+        document.getElementById("taskList").appendChild(li);
+        document.getElementById("taskInput").value = "";
+    }
+</script>
+
+</body>
+</html>
