@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Space Launch Info</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      width: 300px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    button {
+      padding: 8px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    #loading {
+      margin-top: 10px;
+      display: none;
+    }
+
+    #details {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h3>SpaceX Latest Launch</h3>
+
+    <button onclick="loadLaunch()">Load Latest Launch</button>
+
+    <p id="loading">Loading...</p>
+
+    <div id="details"></div>
+  </div>
+
+  <script>
+    function loadLaunch() {
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("details").innerHTML = "";
+
+      fetch("https://api.spacexdata.com/v4/launches/latest")
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          document.getElementById("loading").style.display = "none";
+
+          document.getElementById("details").innerHTML =
+            "<p><b>Mission Name:</b> " + data.name + "</p>";
+        })
+        .catch(function(error) {
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("details").innerHTML =
+            "<p>Something went wrong</p>";
+        });
+    }
+  </script>
+
+</body>
+</html>
